@@ -12,7 +12,6 @@ TileMap* Engine::map;
 
 void Engine::init() {
   addObject(new Player());
-  addObject(new Enemy());
   map = new TileMap();
 }
 

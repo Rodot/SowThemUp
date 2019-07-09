@@ -22,10 +22,10 @@ void Object::init() {
   y = 8;
   vx = 0;
   vy = 0;
-  ax = 0;
-  ay = 0;
   width = 6;
   height = 6;
+  friction = 0.9;
+  bounce = 0;
   life = 10;
   collideMap = true;
   collideObjects = true;
@@ -48,11 +48,9 @@ void Object::update() {
   if (abs(vx) < 0.02) vx = 0;
   if (abs(vy) < 0.02) vy = 0;
 
-  vx += ax;
   x += vx;
   collideMapX();
 
-  vy += ay;
   y += vy;
   collideMapY();
 
@@ -60,8 +58,8 @@ void Object::update() {
 }
 
 void Object::updatePhysics() {
-  vx *= 0.9;
-  vy *= 0.9;
+  vx *= friction;
+  vy *= friction;
 }
 
 int Object::collideMapX() {
@@ -70,7 +68,7 @@ int Object::collideMapX() {
       if ((Engine::map->getTile(x + width, y) == 1) || (Engine::map->getTile(x + width, y + height) == 1)) {
         int tileX = (((int)(x + width) / (int)Engine::map->tileWidth) * (int)Engine::map->tileWidth);
         x = tileX - width - 0.01;
-        vx *= - 0.5;
+        vx *= - bounce;
         return 1;
       }
     }
@@ -78,7 +76,7 @@ int Object::collideMapX() {
       if ((Engine::map->getTile(x, y) == 1) || (Engine::map->getTile(x, y + height) == 1)) {
         int tileX = (((int)x / (int)Engine::map->tileWidth) * (int)Engine::map->tileWidth);
         x = tileX + Engine::map->tileWidth + 0.01;
-        vx *= - 0.5;
+        vx *= - bounce;
         return 1;
       }
     }
@@ -96,14 +94,14 @@ int Object::collideMapY() {
       if ((Engine::map->getTile(x, y + height) == 1) || (Engine::map->getTile(x + width, y + height) == 1)) {
         int tileY = (((int)(y + height) / (int)Engine::map->tileHeight) * (int)Engine::map->tileHeight);
         y = tileY - height - 0.01;
-        vy = 0;
+        vy *= - bounce;
         return 1;
       }
     } else {
       if ((Engine::map->getTile(x, y) == 1) || (Engine::map->getTile(x + width, y) == 1)) {
         int tileY = (((int)y / (int)Engine::map->tileHeight) * (int)Engine::map->tileHeight);
         y = tileY + Engine::map->tileHeight + 0.01;
-        vy = 0;
+        vy *= - bounce;
         return 1;
       }
     }

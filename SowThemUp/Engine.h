@@ -3,6 +3,7 @@
 
 #include "Object.h"
 #include "Player.h"
+#include "Enemy.h"
 #include "TileMap.h"
 
 #define ENGINE_NUM_OBJECTS 50
