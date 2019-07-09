@@ -16,12 +16,11 @@ class Engine {
     static TileMap *map;
 
 
-    void init();
-    void clear();
-    void update();
-    void draw();
+    static void init();
+    static void clear();
+    static void update();
+    static void draw();
     static int addObject(Object* object);
-    void setTileMap(TileMap* tileMap);
 
 };
 

@@ -114,7 +114,3 @@ int Engine::addObject(Object * object) {
   delete object;
   return -1; //no more space
 }
-
-void Engine::setTileMap(TileMap * tileMap) {
-  map = tileMap;
-}

@@ -21,7 +21,7 @@ void Player::update() {
     Engine::addObject(new Bullet(getCenterX(), y + height + 1, vx, vy));
   }
   if (gb.buttons.pressed(BUTTON_B)) {
-    Engine::addObject(new Enemy(x, y + 40, 1, 0));
+    Engine::addObject(new Enemy(x, y + 40, 0.2, 0));
     //add a tree
     Engine::map->setTile(getCenterX(), getCenterY(), 2);
     Engine::addObject(new Particle(getCenterX(), getCenterY(), LIGHTGREEN));

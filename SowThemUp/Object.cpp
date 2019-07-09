@@ -34,9 +34,11 @@ void Object::init() {
 }
 
 void Object::die() {
-  Engine::addObject(new Particle(x, y , RED));
-  Engine::addObject(new Particle(x, y , RED));
-  Engine::addObject(new Particle(x, y , RED));
+  Engine::addObject(new Particle(x, y , ORANGE));
+  Engine::addObject(new Particle(x, y , ORANGE));
+  Engine::addObject(new Particle(x, y , ORANGE));
+  Engine::addObject(new Particle(x, y , YELLOW));
+  Engine::addObject(new Particle(x, y , YELLOW));
 }
 
 void Object::update() {

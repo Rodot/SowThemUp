@@ -16,3 +16,11 @@ void Enemy::init() {
   friction = 1;
   bounce = 1;
 }
+
+void Enemy::update() {
+  Object::update();
+  //burn the trees
+  if (Engine::map->getTile(getCenterX(), getCenterY()) == 2) {
+    Engine::map->setTile(getCenterX(), getCenterY(), 0);
+  }
+}
