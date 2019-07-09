@@ -26,9 +26,6 @@ void Object::init() {
   ay = 0;
   width = 6;
   height = 6;
-  bounce = 0.8;
-  friction = 0.9;
-  density = 1.2;
   life = 10;
   collideMap = true;
   collideObjects = true;
@@ -61,7 +58,6 @@ void Object::update() {
 }
 
 void Object::updatePhysics() {
-  vy += (Engine::gravity * density);
 }
 
 int Object::collideMapX() {
@@ -70,8 +66,7 @@ int Object::collideMapX() {
       if ((Engine::map->getTile(x + width, y) == 1) || (Engine::map->getTile(x + width, y + height) == 1)) {
         int tileX = (((int)(x + width) / (int)Engine::map->tileWidth) * (int)Engine::map->tileWidth);
         x = tileX - width - 0.01;
-        vx *= - bounce;
-        vy *= friction;
+        vx *= - 1;
         return 1;
       }
     }
@@ -79,8 +74,7 @@ int Object::collideMapX() {
       if ((Engine::map->getTile(x, y) == 1) || (Engine::map->getTile(x, y + height) == 1)) {
         int tileX = (((int)x / (int)Engine::map->tileWidth) * (int)Engine::map->tileWidth);
         x = tileX + Engine::map->tileWidth + 0.01;
-        vx *= - bounce;
-        vy *= friction;
+        vx *= - 1;
         return 1;
       }
     }
@@ -94,16 +88,14 @@ int Object::collideMapY() {
       if ((Engine::map->getTile(x, y + height) == 1) || (Engine::map->getTile(x + width, y + height) == 1)) {
         int tileY = (((int)(y + height) / (int)Engine::map->tileHeight) * (int)Engine::map->tileHeight);
         y = tileY - height - 0.01;
-        vy *= - bounce;
-        vx *= friction;
+        vy *= - 1;
         return 1;
       }
     } else {
       if ((Engine::map->getTile(x, y) == 1) || (Engine::map->getTile(x + width, y) == 1)) {
         int tileY = (((int)y / (int)Engine::map->tileHeight) * (int)Engine::map->tileHeight);
         y = tileY + Engine::map->tileHeight + 0.01;
-        vy *= - bounce;
-        vx *= friction;
+        vy *= - 1;
         return 1;
       }
     }
@@ -140,35 +132,11 @@ void Object::interact(Object * obj) {
       }
       if (abs(px) < abs(py)) { //horizontal collision
         x -= (px + 0.01);
-
-        float v1 = vx;
-        float m1 = width * height * density;
-        float v2 = obj->vx;
-        float m2 = obj->width * obj->height * obj->density;
-        vx = v1 * (m1 - m2) / (m1 + m2) + v2 * 2 * m2 / (m1 + m2);
-        obj->vx = v1 * 2 * m1 / (m1 + m2) + v2 * (m2 - m1) / (m1 + m2);
-        vx *= obj->bounce * bounce;
-        obj->vx *= obj->bounce * bounce;
-        //friction
-        float fvy = (vy - obj->vy) * (friction + obj->friction) / 2;
-        vy -= fvy;
-        obj->vy += fvy;
+        obj->vx *= -1;
 
       } else { //vertical collision
         y -= (py + 0.01);
-
-        float v1 = vy;
-        float m1 = width * height * density;
-        float v2 = obj->vx;
-        float m2 = obj->width * obj->height * obj->density;
-        vy = v1 * (m1 - m2) / (m1 + m2) + v2 * 2 * m2 / (m1 + m2);
-        obj->vy = v1 * 2 * m1 / (m1 + m2) + v2 * (m2 - m1) / (m1 + m2);
-        vy *= obj->bounce * bounce;
-        obj->vy *= obj->bounce * bounce;
-        //friction
-        float fvx = (vx - obj->vx) * (friction + obj->friction) / 2;
-        vx -= fvx;
-        obj->vx += fvx;
+        obj->vy *= -1;
       }
     }
   }

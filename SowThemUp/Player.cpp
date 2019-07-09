@@ -65,9 +65,6 @@ void Player::update() {
   if (abs(vx) < 0.02) vx = 0;
   if (abs(vy) < 0.02) vy = 0;
 
-  bounce = 0;
-  if (vy >= 0) friction = 0.8;
-  if (vy < 0) friction = 1;
   vx += ax;
   x += vx;
   int collided = collideMapX();
@@ -80,7 +77,6 @@ void Player::update() {
     }
   }
 
-  friction = 0.6;
   vy += ay;
   y += vy;
   bool falling = (vy > 0) ? true : false;
@@ -89,81 +85,11 @@ void Player::update() {
     jumped = false;
   }
 
-  bounce = 0.6;
-
   Engine::cameraTargetX = getCenterX() - gb.display.width() / 2 + direction * 15;
   Engine::cameraTargetY = getCenterY() - gb.display.height() / 2 ;
-}
-
-//plain copy and paste expect for friction, erk
-void Player::interact(Object * obj) {
-  if (collideObjects && obj->collideObjects) {
-    if (colliding(obj)) {
-      if ((vx == 0) && (vy == 0)) {
-        return;
-      }
-      //distance between centers
-      float dx, dy;
-      //penetration depth
-      float px, py;
-
-      dx = obj->getCenterX() - getCenterX();
-      dy = obj->getCenterY() - getCenterY();
-
-      if ((dx >= 0) && (dy >= 0)) { //bottom right corner
-        px = (x + width) - obj->x;
-        py = (y + height) - obj->y;
-      } else if ((dx >= 0) && (dy <= 0)) { //top right corner
-        px = (x + width) - obj->x;
-        py = y - (obj->y + obj->height);
-      } else if ((dx <= 0) && (dy <= 0)) { //top left corner
-        px = x - (obj->x + obj->width);
-        py = y - (obj->y + obj->height);
-      } else { //bottom left corner
-        px = x - (obj->x + obj->width);
-        py = (y + height) - obj->y;
-      }
-      if (abs(px) < abs(py)) { //horizontal collision
-        x -= (px + 0.01);
-
-        float v1 = vx;
-        float m1 = width * height * density;
-        float v2 = obj->vx;
-        float m2 = obj->width * obj->height * obj->density;
-        vx = v1 * (m1 - m2) / (m1 + m2) + v2 * 2 * m2 / (m1 + m2);
-        obj->vx = v1 * 2 * m1 / (m1 + m2) + v2 * (m2 - m1) / (m1 + m2);
-        vx *= obj->bounce * bounce;
-        obj->vx *= obj->bounce * bounce;
-        //friction
-        float fvy = (vy - obj->vy) * (friction + obj->friction) / 2;
-        vy -= fvy;
-        obj->vy += fvy;
-
-      } else { //vertical collision
-        y -= (py + 0.01);
-        if(y > 0){
-          jumped = false;
-        }
-
-        float v1 = vy;
-        float m1 = width * height * density;
-        float v2 = obj->vx;
-        float m2 = obj->width * obj->height * obj->density;
-        vy = v1 * (m1 - m2) / (m1 + m2) + v2 * 2 * m2 / (m1 + m2);
-        obj->vy = v1 * 2 * m1 / (m1 + m2) + v2 * (m2 - m1) / (m1 + m2);
-        vy *= obj->bounce * bounce;
-        obj->vy *= obj->bounce * bounce;
-        //friction
-        float fvx = (vx - obj->vx) * (friction + obj->friction) / 2;
-        vx -= fvx;
-        //obj->vx += fvx;
-      }
-    }
-  }
 }
 
 void Player::draw() {
   gb.display.setColor(WHITE);
   Object::draw();
 }
-

@@ -7,7 +7,7 @@
 
 class Object {
   public:
-    float x, y, vx, vy, ax, ay, width, height, bounce, friction, density;
+    float x, y, vx, vy, ax, ay, width, height;
     int life;
     bool collideMap, collideObjects, justCreated;
     Color color;

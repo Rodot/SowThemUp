@@ -8,8 +8,6 @@ Particle::Particle(float X, float Y, float VX, float VY, float W, float H, boole
   vy = VY;
   width = W;
   height = H;
-  density = 2;
-  bounce = 0.4;
   collideMap = collide;
   collideObjects = false;
   life = 50;
@@ -24,4 +22,3 @@ void Particle::update(){
 void Particle::die(){
   //do nothing
 }
-

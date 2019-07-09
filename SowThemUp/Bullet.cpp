@@ -8,8 +8,6 @@ Bullet::Bullet(float X, float Y, float VX, float VY, int direction) {
   height = 1;
   vx = 7 * norm(direction);
   vy = float(random(0, 10) - 5) / 10;
-  bounce = 0.1;
-  density = 0.5;
   life = 10;
   collideMap = true;
   collideObjects = false;
