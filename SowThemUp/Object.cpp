@@ -18,8 +18,8 @@ Object::Object(float X, float Y, float W, float H, float VX, float VY) {
 }
 
 void Object::init() {
-  x = random(8, 72);
-  y = random(8, 56);
+  x = 8;
+  y = 8;
   vx = 0;
   vy = 0;
   ax = 0;

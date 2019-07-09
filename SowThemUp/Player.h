@@ -12,7 +12,6 @@ class Player : public Object {
     virtual void die();
     virtual void update();
     virtual void draw();
-    int direction;
 
     bool jumped = false;
 

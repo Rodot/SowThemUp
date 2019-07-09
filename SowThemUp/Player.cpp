@@ -8,7 +8,6 @@ Player::Player() {
 
 void Player::init() {
   Object::init();
-  direction = 1;
   color = WHITE;
 }
 
@@ -18,44 +17,34 @@ void Player::die() {
 
 void Player::update() {
   if (gb.buttons.repeat(BUTTON_A, 4)) {
-    if (direction > 0) {
-      Engine::addObject(new Bullet(x + width + 1, getCenterY(), vx, vy, direction));
-    } else {
-      Engine::addObject(new Bullet(x - 1, getCenterY(), vx, vy, direction));
-    }
+    Engine::addObject(new Bullet(x + width + 1, getCenterY(), vx, vy, 0));
   }
   if (gb.buttons.pressed(BUTTON_B)) {
-    Engine::addObject(new Object(x, y - 8, 6, 6, direction , vy - 3));
+    Engine::addObject(new Object(x, y - 8, 6, 6, 0 , vy - 3));
   }
 
   ax = 0;
   ay = 0;
 
-  //underwater
-  if ((Engine::map->getTile(getCenterX(), getCenterY()) == 2)) {
-    jumped = false;
-    if (gb.buttons.repeat(BUTTON_UP, 1)) {
-      vy -= 0.5;
-    }
-    if (gb.buttons.repeat(BUTTON_DOWN, 1)) {
-      vy += 0.5;
-    }
-  }
-  if (gb.buttons.pressed(BUTTON_UP) && (!jumped)) {
-    vy = -3;
-    jumped = true;
-  }
-  if ((gb.buttons.timeHeld(BUTTON_UP) > 0) && (gb.buttons.timeHeld(BUTTON_UP) < 6) && (vy < 0)) {
-    vy -= 0.5;
-  }
   if (gb.buttons.repeat(BUTTON_RIGHT, 1)) {
-    vx += 1;
-    direction = 1;
+    vx += 0.5;
   }
   if (gb.buttons.repeat(BUTTON_LEFT, 1)) {
-    vx -= 1;
-    direction = -1;
+    vx -= 0.5;
   }
+  if (gb.buttons.repeat(BUTTON_UP, 1)) {
+    vy -= 1;
+  }
+  if (gb.buttons.repeat(BUTTON_DOWN, 1)) {
+    vy += 0.1;
+  }
+
+  //air friction
+  vx *= 0.9;
+  vy *= 0.9;
+
+  //constant player movement
+  vy = max(vy, 0.1);
 
   updatePhysics();
 
@@ -68,14 +57,6 @@ void Player::update() {
   vx += ax;
   x += vx;
   int collided = collideMapX();
-  //wall jump
-  if ((vy > 0) && collided) {
-    if (gb.buttons.pressed(BUTTON_UP)) {
-      vy = -3;
-      vx = - direction * 5;
-      jumped = true;
-    }
-  }
 
   vy += ay;
   y += vy;
@@ -85,8 +66,8 @@ void Player::update() {
     jumped = false;
   }
 
-  Engine::cameraTargetX = getCenterX() - gb.display.width() / 2 + direction * 15;
-  Engine::cameraTargetY = getCenterY() - gb.display.height() / 2 ;
+  Engine::cameraTargetX = getCenterX() - gb.display.width() / 2;
+  Engine::cameraTargetY = getCenterY() - gb.display.height() / 5;
 }
 
 void Player::draw() {
