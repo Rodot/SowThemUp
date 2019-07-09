@@ -18,9 +18,22 @@ void Enemy::init() {
 }
 
 void Enemy::update() {
-  Object::update();
-  //burn the trees
-  if (Engine::map->getTile(getCenterX(), getCenterY()) == 2) {
-    Engine::map->setTile(getCenterX(), getCenterY(), 0);
+  //move only if on screen
+  if (y < (Engine::cameraY + gb.display.height())) {
+    Object::update();
+    //burn the trees
+    if (Engine::map.getTile(getCenterX(), getCenterY()) == 2) {
+      Engine::map.setTile(getCenterX(), getCenterY(), 0);
+    }
+  }
+}
+
+void Enemy::interact(Object * obj) {
+  if (!life) return;
+  if (!obj->collideObjects) return;
+  if (colliding(obj)) {
+    obj->life -= 10;
+    life = 0;
+    return;
   }
 }

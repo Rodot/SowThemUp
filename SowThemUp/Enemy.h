@@ -9,6 +9,7 @@ class Enemy : public Object {
     Enemy(float X, float Y, float VX, float VY);
     virtual void init();
     virtual void update();
+    virtual void interact(Object* obj);
 };
 
 #endif // _ENEMY_H_

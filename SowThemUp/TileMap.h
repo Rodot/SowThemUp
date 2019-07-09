@@ -18,6 +18,7 @@ class TileMap {
     void setTile(int x, int y, int t);
     void draw(); 
     int getTreeCount();
+    void update();
 };
 
 #endif // _TILEMAP_H_

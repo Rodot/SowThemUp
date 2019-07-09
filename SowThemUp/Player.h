@@ -8,10 +8,11 @@
 class Player : public Object {
   public:
     Player();
-    virtual void init();
-    virtual void die();
-    virtual void update();
+    void init();
+    void die();
+    void update();
     void draw();
+    virtual void interact(Object* obj);
 };
 
 #endif // _PLAYER_H_

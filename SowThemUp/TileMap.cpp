@@ -8,6 +8,18 @@ TileMap::TileMap() {
 
 void TileMap::load(const uint8_t* d) {
   memcpy(data, d, widthTiles * heightTiles);
+  //Spawn enemies
+  for (int i = 0; i < widthTiles; i++) {
+    for (int j = 0; j < heightTiles; j++) {
+      int tile = data[i + (j * widthTiles)];
+      if (tile == 4) {
+        //create the enemy
+        Engine::addObject(new Enemy(i * tileSize, j * tileSize, 0.2, 0));
+        //remove the tile
+        data[i + (j * widthTiles)] = 0;
+      }
+    }
+  }
 }
 
 void TileMap::draw() {

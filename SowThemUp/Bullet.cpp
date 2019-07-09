@@ -28,7 +28,7 @@ void Bullet::die() {
   life = 0;
   //remove the tile with 1 chance out of 3
   if ((random(0, 3) == 0)) {
-    Engine::map->setTile(x, y, 0);
+    Engine::map.setTile(x, y, 0);
   } else {
     //just splash water particles
     Engine::addObject(new Particle(x + 1, y, DARKBLUE));
@@ -36,7 +36,7 @@ void Bullet::die() {
     Engine::addObject(new Particle(x + 1, y, BLUE));
   }
   //flame particles if it's on fire
-  if (Engine::map->getTile(getCenterX(), getCenterY()) == 3) {
+  if (Engine::map.getTile(getCenterX(), getCenterY()) == 3) {
     Engine::addObject(new Particle(x + 1, y, ORANGE));
     Engine::addObject(new Particle(x + 1, y, ORANGE));
     Engine::addObject(new Particle(x + 1, y, ORANGE));
@@ -46,12 +46,11 @@ void Bullet::die() {
   }
 }
 
-
 void Bullet::interact(Object * obj) {
   if (!life) return;
   if (!obj->collideObjects) return;
   if (colliding(obj)) {
-    obj->life -= 3;
+    obj->life -= 4;
     life = 0;
     return;
   }

@@ -67,24 +67,24 @@ void Object::updatePhysics() {
 int Object::collideMapX() {
   if (collideMap) {
     if (vx > 0) {
-      if ((Engine::map->getTile(x + width, y) == 1) || (Engine::map->getTile(x + width, y + height) == 1)) {
-        int tileX = (((int)(x + width) / (int)Engine::map->tileSize) * (int)Engine::map->tileSize);
+      if ((Engine::map.getTile(x + width, y) == 1) || (Engine::map.getTile(x + width, y + height) == 1)) {
+        int tileX = (((int)(x + width) / (int)Engine::map.tileSize) * (int)Engine::map.tileSize);
         x = tileX - width - 0.01;
         vx *= - bounce;
         return 1;
       }
     }
     else {
-      if ((Engine::map->getTile(x, y) == 1) || (Engine::map->getTile(x, y + height) == 1)) {
-        int tileX = (((int)x / (int)Engine::map->tileSize) * (int)Engine::map->tileSize);
-        x = tileX + Engine::map->tileSize + 0.01;
+      if ((Engine::map.getTile(x, y) == 1) || (Engine::map.getTile(x, y + height) == 1)) {
+        int tileX = (((int)x / (int)Engine::map.tileSize) * (int)Engine::map.tileSize);
+        x = tileX + Engine::map.tileSize + 0.01;
         vx *= - bounce;
         return 1;
       }
     }
   }
   //Loose life when touching fire
-  if(Engine::map->getTile(getCenterX(), getCenterY()) == 3){
+  if(Engine::map.getTile(getCenterX(), getCenterY()) == 3){
     life --;
   }
   return 0;
@@ -93,65 +93,29 @@ int Object::collideMapX() {
 int Object::collideMapY() {
   if (collideMap) {
     if (vy > 0) {
-      if ((Engine::map->getTile(x, y + height) == 1) || (Engine::map->getTile(x + width, y + height) == 1)) {
-        int tileY = (((int)(y + height) / (int)Engine::map->tileSize) * (int)Engine::map->tileSize);
+      if ((Engine::map.getTile(x, y + height) == 1) || (Engine::map.getTile(x + width, y + height) == 1)) {
+        int tileY = (((int)(y + height) / (int)Engine::map.tileSize) * (int)Engine::map.tileSize);
         y = tileY - height - 0.01;
         vy *= - bounce;
         return 1;
       }
     } else {
-      if ((Engine::map->getTile(x, y) == 1) || (Engine::map->getTile(x + width, y) == 1)) {
-        int tileY = (((int)y / (int)Engine::map->tileSize) * (int)Engine::map->tileSize);
-        y = tileY + Engine::map->tileSize + 0.01;
+      if ((Engine::map.getTile(x, y) == 1) || (Engine::map.getTile(x + width, y) == 1)) {
+        int tileY = (((int)y / (int)Engine::map.tileSize) * (int)Engine::map.tileSize);
+        y = tileY + Engine::map.tileSize + 0.01;
         vy *= - bounce;
         return 1;
       }
     }
   }
   //Loose life when touching fire
-  if(Engine::map->getTile(getCenterX(), getCenterY()) == 3){
+  if(Engine::map.getTile(getCenterX(), getCenterY()) == 3){
     life --;
   }
   return 0;
 }
 
 void Object::interact(Object * obj) {
-  if (collideObjects && obj->collideObjects) {
-    if (colliding(obj)) {
-      if ((vx == 0) && (vy == 0)) {
-        return;
-      }
-      //distance between centers
-      float dx, dy;
-      //penetration depth
-      float px, py;
-
-      dx = obj->getCenterX() - getCenterX();
-      dy = obj->getCenterY() - getCenterY();
-
-      if ((dx >= 0) && (dy >= 0)) { //bottom right corner
-        px = (x + width) - obj->x;
-        py = (y + height) - obj->y;
-      } else if ((dx >= 0) && (dy <= 0)) { //top right corner
-        px = (x + width) - obj->x;
-        py = y - (obj->y + obj->height);
-      } else if ((dx <= 0) && (dy <= 0)) { //top left corner
-        px = x - (obj->x + obj->width);
-        py = y - (obj->y + obj->height);
-      } else { //bottom left corner
-        px = x - (obj->x + obj->width);
-        py = (y + height) - obj->y;
-      }
-      if (abs(px) < abs(py)) { //horizontal collision
-        x -= (px + 0.01);
-        obj->vx *= -1;
-
-      } else { //vertical collision
-        y -= (py + 0.01);
-        obj->vy *= -1;
-      }
-    }
-  }
 }
 
 void Object::draw() {
@@ -161,13 +125,13 @@ void Object::draw() {
 
 int Object::collidingTile() {
   int tile = -1;
-  int temp = Engine::map->getTile(x, y);
+  int temp = Engine::map.getTile(x, y);
   if (temp > tile) tile = temp;
-  temp = Engine::map->getTile(x + width, y);
+  temp = Engine::map.getTile(x + width, y);
   if (temp > tile) tile = temp;
-  temp = Engine::map->getTile(x, y + height);
+  temp = Engine::map.getTile(x, y + height);
   if (temp > tile) tile = temp;
-  temp = Engine::map->getTile(x + width, y + height);
+  temp = Engine::map.getTile(x + width, y + height);
   if (temp > tile) tile = temp;
   return tile;
 }

@@ -12,7 +12,7 @@ void Player::init() {
 }
 
 void Player::die() {
-  Engine::addObject(new Player());
+  //Engine::addObject(new Player());
 }
 
 void Player::update() {
@@ -21,9 +21,8 @@ void Player::update() {
     Engine::addObject(new Bullet(getCenterX(), y + height + 1, vx, vy));
   }
   if (gb.buttons.pressed(BUTTON_B)) {
-    Engine::addObject(new Enemy(x, y + 40, 0.2, 0));
     //add a tree
-    Engine::map->setTile(getCenterX(), getCenterY(), 2);
+    Engine::map.setTile(getCenterX(), getCenterY(), 2);
     Engine::addObject(new Particle(getCenterX(), getCenterY(), LIGHTGREEN));
     Engine::addObject(new Particle(getCenterX(), getCenterY(), LIGHTGREEN));
     Engine::addObject(new Particle(getCenterX(), getCenterY(), LIGHTGREEN));
@@ -70,7 +69,12 @@ void Player::update() {
 }
 
 
-void Player::draw(){
+void Player::draw() {
   Object::draw();
+  //gb.display.setCursor(0, gb.display.height() - 5);
   //gb.display.println(life);
+}
+
+void Player::interact(Object * obj) {
+  //do nothing
 }

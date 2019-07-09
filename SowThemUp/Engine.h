@@ -13,15 +13,13 @@ class Engine {
   public:
     static float gravity, cameraX, cameraY, cameraTargetX, cameraTargetY;
     static Object *objects[ENGINE_NUM_OBJECTS];
-    static TileMap *map;
-
+    static TileMap map;
 
     static void init();
     static void clear();
     static void update();
     static void draw();
     static int addObject(Object* object);
-
 };
 
 #endif // _ENGINE_H_

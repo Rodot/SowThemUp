@@ -8,14 +8,13 @@ float Engine::cameraY = 8;
 float Engine::cameraTargetX = 8;
 float Engine::cameraTargetY = 8;
 Object* Engine::objects[ENGINE_NUM_OBJECTS];
-TileMap* Engine::map;
+TileMap Engine::map;
 
 extern const uint8_t map1[];
 
 void Engine::init() {
   addObject(new Player());
-  map = new TileMap();
-  map->load(map1);
+  map.load(map1);
 }
 
 void Engine::clear() {
@@ -47,8 +46,8 @@ void Engine::update() {
     //kill objects going out of the map
     if (  (objects[i]->x < 0)
           || (objects[i]->y < 0)
-          || (objects[i]->x > (map->widthTiles * map->tileSize))
-          || (objects[i]->y > (map->heightTiles * map->tileSize))) {
+          || (objects[i]->x > (map.widthTiles * map.tileSize))
+          || (objects[i]->y > (map.heightTiles * map.tileSize))) {
       objects[i]->life = 0;
     }
   }
@@ -78,9 +77,7 @@ void Engine::draw() {
   cameraX = (cameraX * 7 + cameraTargetX) / 8;
   cameraY = (cameraY * 7 + cameraTargetY) / 8;
   //draw map
-  if (map != 0) {
-    map->draw();
-  }
+  map.draw();
   //draw all objects
   for (int i = 0; i < ENGINE_NUM_OBJECTS; i++) {
     if (objects[i] == 0) continue;
@@ -89,7 +86,7 @@ void Engine::draw() {
   }
   //print info
   gb.display.setColor(WHITE);
-  gb.display.print(gb.getCpuLoad());
+  /*gb.display.print(gb.getCpuLoad());
   gb.display.print("% ");
   gb.display.print((100 * gb.getFreeRam()) / 32768);
   gb.display.print("% ");
@@ -99,9 +96,9 @@ void Engine::draw() {
   }
   gb.display.print(num);
   gb.display.print("/");
-  gb.display.println(ENGINE_NUM_OBJECTS);
+  gb.display.println(ENGINE_NUM_OBJECTS);*/
   gb.display.print("TREES:");
-  gb.display.print(Engine::map->getTreeCount());
+  gb.display.print(Engine::map.getTreeCount());
 }
 
 int Engine::addObject(Object * object) {
