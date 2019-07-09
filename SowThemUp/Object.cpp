@@ -61,15 +61,7 @@ void Object::update() {
 }
 
 void Object::updatePhysics() {
-  //water physics
-  if (collideMap && (Engine::map->getTile(getCenterX(), getCenterY()) == 2)) {
-    vy += (Engine::gravity * (density - 1));
-    vy *= 0.6;
-    vx *= 0.6;
-  } else {
-    //normal physics
-    vy += (Engine::gravity * density);
-  }
+  vy += (Engine::gravity * density);
 }
 
 int Object::collideMapX() {
