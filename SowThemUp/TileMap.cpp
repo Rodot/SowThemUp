@@ -4,14 +4,9 @@
 #include "Engine.h"
 
 TileMap::TileMap() {
-  tileSize = 8;
-  widthTiles = 10;
-  heightTiles = 50;
 }
 
 void TileMap::load(const uint8_t* d) {
-  delete[] data;
-  data = new uint8_t[widthTiles * heightTiles];
   memcpy(data, d, widthTiles * heightTiles);
 }
 
