@@ -1,17 +1,17 @@
 #include "Particle.h"
 
-Particle::Particle(float X, float Y, float VX, float VY, float W, float H, boolean collide){
+Particle::Particle(float X, float Y, Color c){
   init();
   x = X;
   y = Y;
-  vx = random(0,3)-1;
-  vy = random(0,3)-1;
-  width = W;
-  height = H;
-  collideMap = collide;
+  vx = float(random(0,11)-5)/5.0;
+  vy = float(random(0,11)-5)/5.0;
+  width = random(1,3);
+  height = width;
+  collideMap = true;
   collideObjects = false;
   life = 50;
-  color = DARKBLUE;
+  color = c;
 }
 
 void Particle::update(){

@@ -17,10 +17,20 @@ void Player::die() {
 
 void Player::update() {
   if (gb.buttons.repeat(BUTTON_A, 4)) {
+    //throw water
     Engine::addObject(new Bullet(getCenterX(), y + height + 1, vx, vy));
   }
   if (gb.buttons.pressed(BUTTON_B)) {
-    Engine::addObject(new Object(x, y - 8, 6, 6, 0 , vy - 3));
+    //add a tree
+    Engine::map->setTile(getCenterX(), getCenterY(), 2);
+    Engine::addObject(new Particle(getCenterX(), getCenterY(), LIGHTGREEN));
+    Engine::addObject(new Particle(getCenterX(), getCenterY(), LIGHTGREEN));
+    Engine::addObject(new Particle(getCenterX(), getCenterY(), LIGHTGREEN));
+    Engine::addObject(new Particle(getCenterX(), getCenterY(), LIGHTGREEN));
+    Engine::addObject(new Particle(getCenterX(), getCenterY(), LIGHTGREEN));
+    Engine::addObject(new Particle(getCenterX(), getCenterY(), YELLOW));
+    Engine::addObject(new Particle(getCenterX(), getCenterY(), YELLOW));
+    Engine::addObject(new Particle(getCenterX(), getCenterY(), YELLOW));
   }
 
   if (gb.buttons.repeat(BUTTON_RIGHT, 1)) {
@@ -56,4 +66,10 @@ void Player::update() {
 
   Engine::cameraTargetX = getCenterX() - gb.display.width() / 2;
   Engine::cameraTargetY = getCenterY() - gb.display.height() / 5;
+}
+
+
+void Player::draw(){
+  Object::draw();
+  //gb.display.println(life);
 }

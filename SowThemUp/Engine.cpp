@@ -12,6 +12,7 @@ TileMap* Engine::map;
 
 void Engine::init() {
   addObject(new Player());
+  addObject(new Enemy());
   map = new TileMap();
 }
 
@@ -97,6 +98,8 @@ void Engine::draw() {
   gb.display.print(num);
   gb.display.print("/");
   gb.display.println(ENGINE_NUM_OBJECTS);
+  gb.display.print("TREES:");
+  gb.display.print(Engine::map->getTreeCount());
 }
 
 int Engine::addObject(Object * object) {

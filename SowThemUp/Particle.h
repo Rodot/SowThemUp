@@ -5,7 +5,7 @@
 
 class Particle : public Object {
   public:
-    Particle(float X, float Y, float VX, float VY, float W, float H, boolean collide);
+    Particle(float X, float Y, Color c);
     virtual void update();
     virtual void die();
 };

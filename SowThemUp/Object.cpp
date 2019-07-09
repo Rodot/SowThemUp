@@ -30,11 +30,13 @@ void Object::init() {
   collideMap = true;
   collideObjects = true;
   justCreated = true;
-  color = PINK;
+  color = RED;
 }
 
 void Object::die() {
-  Engine::addObject(new Particle(x, y , vx, -3, width, height, false));
+  Engine::addObject(new Particle(x, y , RED));
+  Engine::addObject(new Particle(x, y , RED));
+  Engine::addObject(new Particle(x, y , RED));
 }
 
 void Object::update() {
@@ -81,6 +83,10 @@ int Object::collideMapX() {
       }
     }
   }
+  //Loose life when touching fire
+  if(Engine::map->getTile(getCenterX(), getCenterY()) == 3){
+    life --;
+  }
   return 0;
 }
 
@@ -90,17 +96,21 @@ int Object::collideMapY() {
       if ((Engine::map->getTile(x, y + height) == 1) || (Engine::map->getTile(x + width, y + height) == 1)) {
         int tileY = (((int)(y + height) / (int)Engine::map->tileHeight) * (int)Engine::map->tileHeight);
         y = tileY - height - 0.01;
-        vy *= - 0.5;
+        vy = 0;
         return 1;
       }
     } else {
       if ((Engine::map->getTile(x, y) == 1) || (Engine::map->getTile(x + width, y) == 1)) {
         int tileY = (((int)y / (int)Engine::map->tileHeight) * (int)Engine::map->tileHeight);
         y = tileY + Engine::map->tileHeight + 0.01;
-        vy *= - 0.5;
+        vy = 0;
         return 1;
       }
     }
+  }
+  //Loose life when touching fire
+  if(Engine::map->getTile(getCenterX(), getCenterY()) == 3){
+    life --;
   }
   return 0;
 }

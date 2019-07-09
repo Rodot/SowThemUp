@@ -12,7 +12,6 @@ class Bullet : public Object {
     Bullet(float X, float Y, float VX, float VY);
     virtual void die();
     virtual void update();
-    virtual void updatePhysics();
     virtual void interact(Object* obj);
 };
 

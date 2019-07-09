@@ -11,6 +11,7 @@ class Player : public Object {
     virtual void init();
     virtual void die();
     virtual void update();
+    void draw();
 };
 
 #endif // _PLAYER_H_
