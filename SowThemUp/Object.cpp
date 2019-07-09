@@ -30,7 +30,7 @@ void Object::init() {
   collideMap = true;
   collideObjects = true;
   justCreated = true;
-  color = GRAY;
+  color = PINK;
 }
 
 void Object::die() {
@@ -58,6 +58,8 @@ void Object::update() {
 }
 
 void Object::updatePhysics() {
+  vx *= 0.9;
+  vy *= 0.9;
 }
 
 int Object::collideMapX() {
@@ -66,7 +68,7 @@ int Object::collideMapX() {
       if ((Engine::map->getTile(x + width, y) == 1) || (Engine::map->getTile(x + width, y + height) == 1)) {
         int tileX = (((int)(x + width) / (int)Engine::map->tileWidth) * (int)Engine::map->tileWidth);
         x = tileX - width - 0.01;
-        vx *= - 1;
+        vx *= - 0.5;
         return 1;
       }
     }
@@ -74,7 +76,7 @@ int Object::collideMapX() {
       if ((Engine::map->getTile(x, y) == 1) || (Engine::map->getTile(x, y + height) == 1)) {
         int tileX = (((int)x / (int)Engine::map->tileWidth) * (int)Engine::map->tileWidth);
         x = tileX + Engine::map->tileWidth + 0.01;
-        vx *= - 1;
+        vx *= - 0.5;
         return 1;
       }
     }
@@ -88,14 +90,14 @@ int Object::collideMapY() {
       if ((Engine::map->getTile(x, y + height) == 1) || (Engine::map->getTile(x + width, y + height) == 1)) {
         int tileY = (((int)(y + height) / (int)Engine::map->tileHeight) * (int)Engine::map->tileHeight);
         y = tileY - height - 0.01;
-        vy *= - 1;
+        vy *= - 0.5;
         return 1;
       }
     } else {
       if ((Engine::map->getTile(x, y) == 1) || (Engine::map->getTile(x + width, y) == 1)) {
         int tileY = (((int)y / (int)Engine::map->tileHeight) * (int)Engine::map->tileHeight);
         y = tileY + Engine::map->tileHeight + 0.01;
-        vy *= - 1;
+        vy *= - 0.5;
         return 1;
       }
     }

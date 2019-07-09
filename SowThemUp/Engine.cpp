@@ -74,15 +74,17 @@ void Engine::update() {
 void Engine::draw() {
   cameraX = (cameraX * 7 + cameraTargetX) / 8;
   cameraY = (cameraY * 7 + cameraTargetY) / 8;
+  //draw map
   if (map != 0) {
     map->draw();
   }
+  //draw all objects
   for (int i = 0; i < ENGINE_NUM_OBJECTS; i++) {
     if (objects[i] == 0) continue;
     if (objects[i]->justCreated) continue;
-    gb.display.setColor(GRAY);
     objects[i]->draw();
   }
+  //print info
   gb.display.setColor(WHITE);
   gb.display.print(gb.getCpuLoad());
   gb.display.print("% ");
@@ -111,4 +113,3 @@ int Engine::addObject(Object * object) {
 void Engine::setTileMap(TileMap * tileMap) {
   map = tileMap;
 }
-

@@ -11,10 +11,6 @@ class Player : public Object {
     virtual void init();
     virtual void die();
     virtual void update();
-    virtual void draw();
-
-    bool jumped = false;
-
 };
 
 #endif // _PLAYER_H_
