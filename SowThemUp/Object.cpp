@@ -66,7 +66,7 @@ int Object::collideMapX() {
   if (collideMap) {
     if (vx > 0) {
       if ((Engine::map->getTile(x + width, y) == 1) || (Engine::map->getTile(x + width, y + height) == 1)) {
-        int tileX = (((int)(x + width) / (int)Engine::map->tileWidth) * (int)Engine::map->tileWidth);
+        int tileX = (((int)(x + width) / (int)Engine::map->tileSize) * (int)Engine::map->tileSize);
         x = tileX - width - 0.01;
         vx *= - bounce;
         return 1;
@@ -74,8 +74,8 @@ int Object::collideMapX() {
     }
     else {
       if ((Engine::map->getTile(x, y) == 1) || (Engine::map->getTile(x, y + height) == 1)) {
-        int tileX = (((int)x / (int)Engine::map->tileWidth) * (int)Engine::map->tileWidth);
-        x = tileX + Engine::map->tileWidth + 0.01;
+        int tileX = (((int)x / (int)Engine::map->tileSize) * (int)Engine::map->tileSize);
+        x = tileX + Engine::map->tileSize + 0.01;
         vx *= - bounce;
         return 1;
       }
@@ -92,15 +92,15 @@ int Object::collideMapY() {
   if (collideMap) {
     if (vy > 0) {
       if ((Engine::map->getTile(x, y + height) == 1) || (Engine::map->getTile(x + width, y + height) == 1)) {
-        int tileY = (((int)(y + height) / (int)Engine::map->tileHeight) * (int)Engine::map->tileHeight);
+        int tileY = (((int)(y + height) / (int)Engine::map->tileSize) * (int)Engine::map->tileSize);
         y = tileY - height - 0.01;
         vy *= - bounce;
         return 1;
       }
     } else {
       if ((Engine::map->getTile(x, y) == 1) || (Engine::map->getTile(x + width, y) == 1)) {
-        int tileY = (((int)y / (int)Engine::map->tileHeight) * (int)Engine::map->tileHeight);
-        y = tileY + Engine::map->tileHeight + 0.01;
+        int tileY = (((int)y / (int)Engine::map->tileSize) * (int)Engine::map->tileSize);
+        y = tileY + Engine::map->tileSize + 0.01;
         vy *= - bounce;
         return 1;
       }

@@ -10,9 +10,12 @@ float Engine::cameraTargetY = 8;
 Object* Engine::objects[ENGINE_NUM_OBJECTS];
 TileMap* Engine::map;
 
+extern const uint8_t map1[];
+
 void Engine::init() {
   addObject(new Player());
   map = new TileMap();
+  map->load(map1);
 }
 
 void Engine::clear() {
@@ -44,8 +47,8 @@ void Engine::update() {
     //kill objects going out of the map
     if (  (objects[i]->x < 0)
           || (objects[i]->y < 0)
-          || (objects[i]->x > (map->widthTiles * map->tileWidth))
-          || (objects[i]->y > (map->heightTiles * map->tileHeight))) {
+          || (objects[i]->x > (map->widthTiles * map->tileSize))
+          || (objects[i]->y > (map->heightTiles * map->tileSize))) {
       objects[i]->life = 0;
     }
   }
