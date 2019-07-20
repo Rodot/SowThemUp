@@ -1,6 +1,5 @@
 #include "Enemy.h"
 #include <Gamebuino-Meta.h>
-#include "Toolbox.h"
 
 Enemy::Enemy(float X, float Y, float VX, float VY) {
   init();
@@ -47,7 +46,7 @@ void Enemy::interact(Object * obj) {
   }
 }
 
-void Enemy::die(){
+void Enemy::die() {
   //particle effects
   Engine::addObject(new Particle(x, y , ORANGE));
   Engine::addObject(new Particle(x, y , ORANGE));

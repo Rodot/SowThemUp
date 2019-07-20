@@ -6,7 +6,7 @@ class TileMap {
   public:
     //the size of the map in number of tiles
     static const int widthTiles = 10;
-    static const int heightTiles = 50; 
+    static const int heightTiles = 50;
     //the widht/height of the tiles in number of pixels
     static const int tileSize = 8;
     //stores the map's data
@@ -16,7 +16,7 @@ class TileMap {
     void load(const uint8_t* d);
     int getTile(int x, int y);
     void setTile(int x, int y, int t);
-    void draw(); 
+    void draw();
     int getTreeCount();
     void update();
 };

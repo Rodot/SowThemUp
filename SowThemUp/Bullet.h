@@ -3,7 +3,6 @@
 
 #include <Arduino.h>
 #include "Object.h"
-#include "Toolbox.h"
 #include "Engine.h"
 #include "Particle.h"
 
@@ -14,6 +13,5 @@ class Bullet : public Object {
     virtual void update();
     virtual void interact(Object* obj);
 };
-
 
 #endif //_BULLET_H_

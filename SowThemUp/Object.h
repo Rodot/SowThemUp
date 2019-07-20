@@ -4,7 +4,6 @@
 #include <Arduino.h>
 #include <Gamebuino-Meta.h>
 
-
 class Object {
   public:
     float x, y, vx, vy, width, height, friction, bounce;

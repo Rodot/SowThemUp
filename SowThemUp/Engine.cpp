@@ -87,16 +87,16 @@ void Engine::draw() {
   //print info
   gb.display.setColor(WHITE);
   /*gb.display.print(gb.getCpuLoad());
-  gb.display.print("% ");
-  gb.display.print((100 * gb.getFreeRam()) / 32768);
-  gb.display.print("% ");
-  int num = 0;
-  for (int i = 0; i < ENGINE_NUM_OBJECTS; i++) {
+    gb.display.print("% ");
+    gb.display.print((100 * gb.getFreeRam()) / 32768);
+    gb.display.print("% ");
+    int num = 0;
+    for (int i = 0; i < ENGINE_NUM_OBJECTS; i++) {
     if (objects[i] != 0) num++;
-  }
-  gb.display.print(num);
-  gb.display.print("/");
-  gb.display.println(ENGINE_NUM_OBJECTS);*/
+    }
+    gb.display.print(num);
+    gb.display.print("/");
+    gb.display.println(ENGINE_NUM_OBJECTS);*/
   gb.display.print("TREES:");
   gb.display.print(Engine::map.getTreeCount());
 }

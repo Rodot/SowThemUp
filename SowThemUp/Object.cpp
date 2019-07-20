@@ -1,7 +1,5 @@
 #include "Object.h"
-
 #include "Engine.h"
-#include "Toolbox.h"
 
 Object::Object() {
   init();
@@ -9,20 +7,20 @@ Object::Object() {
 
 void Object::init() {
   //all fields to be set the the child class' init
-  /* 
-  x = 0;
-  y = 0;
-  vx = 0;
-  vy = 0;
-  width = 8;
-  height = 8;
-  friction = 1;
-  bounce = 0;
-  life = 10;
-  collideMap = true;
-  collideObjects = true;
-  justCreated = true;
-  color = PINK;
+  /*
+    x = 0;
+    y = 0;
+    vx = 0;
+    vy = 0;
+    width = 8;
+    height = 8;
+    friction = 1;
+    bounce = 0;
+    life = 10;
+    collideMap = true;
+    collideObjects = true;
+    justCreated = true;
+    color = PINK;
   */
 }
 
@@ -44,7 +42,7 @@ void Object::update() {
   collideMapY();
 }
 
-void Object::die(){
+void Object::die() {
   //do nothing
 }
 
@@ -72,7 +70,7 @@ int Object::collideMapX() {
     }
   }
   //Loose life when touching fire
-  if(Engine::map.getTile(getCenterX(), getCenterY()) == 3){
+  if (Engine::map.getTile(getCenterX(), getCenterY()) == 3) {
     life --;
   }
   return 0;
@@ -97,7 +95,7 @@ int Object::collideMapY() {
     }
   }
   //Loose life when touching fire
-  if(Engine::map.getTile(getCenterX(), getCenterY()) == 3){
+  if (Engine::map.getTile(getCenterX(), getCenterY()) == 3) {
     life --;
   }
   return 0;
@@ -122,7 +120,7 @@ int Object::collidingTile() {
 }
 
 int Object::colliding(Object * obj) {
-  return collideRectRect(x, y, width, height, obj->x, obj->y, obj->width, obj->height);
+  return gb.collideRectRect(x, y, width, height, obj->x, obj->y, obj->width, obj->height);
 }
 
 float Object::getCenterX() {

@@ -1,13 +1,13 @@
 #include "Particle.h"
 
-Particle::Particle(float X, float Y, Color c){
+Particle::Particle(float X, float Y, Color c) {
   x = X;
   y = Y;
-  vx = float(random(0,11)-5)/5.0;
-  vy = float(random(0,11)-5)/5.0;
+  vx = float(random(0, 11) - 5) / 5.0;
+  vy = float(random(0, 11) - 5) / 5.0;
   friction = 0.8;
   bounce = 1;
-  width = random(1,3);
+  width = random(1, 3);
   height = width;
   collideMap = true;
   collideObjects = false;
@@ -16,7 +16,7 @@ Particle::Particle(float X, float Y, Color c){
   color = c;
 }
 
-void Particle::update(){
+void Particle::update() {
   Object::update();
   //if the particle doesn't move, kill it
   if ((abs(vx) + abs(vy)) < 0.5) {
@@ -26,7 +26,7 @@ void Particle::update(){
   life --;
 }
 
-void Particle::die(){
+void Particle::die() {
   //do nothing
 }
 

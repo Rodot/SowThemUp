@@ -1,6 +1,5 @@
 #include "Player.h"
 #include <Gamebuino-Meta.h>
-#include "Toolbox.h"
 
 Player::Player() {
   init();
@@ -73,7 +72,7 @@ void Player::update() {
   //limit maximum speeds
   vx = constrain(vx, -3, 3);
   vy = constrain(vy, -3, 3);
-  
+
   //stop if speed is really low
   if (abs(vx) < 0.02) vx = 0;
   if (abs(vy) < 0.02) vy = 0;
