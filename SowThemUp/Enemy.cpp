@@ -1,18 +1,14 @@
 #include "Enemy.h"
 #include <Gamebuino-Meta.h>
 
-Enemy::Enemy(float X, float Y, float VX, float VY) {
+Enemy::Enemy(float X, float Y) {
   init();
   x = X;
   y = Y;
-  vx = VX;
-  vy = VY;
 }
 
 void Enemy::init() {
-  x = 8;
-  y = 8;
-  vx = 0;
+  vx = 0.5;
   vy = 0;
   width = 6;
   height = 6;

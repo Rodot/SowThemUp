@@ -20,6 +20,7 @@ class Engine {
     static void update();
     static void draw();
     static int addObject(Object* object);
+    static int growTree(int x, int y);
 };
 
 #endif // _ENGINE_H_

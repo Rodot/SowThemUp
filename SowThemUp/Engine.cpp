@@ -111,3 +111,12 @@ int Engine::addObject(Object * object) {
   delete object;
   return -1; //no more space
 }
+
+int Engine::growTree(int x, int y) {
+  if (Engine::map.getTile(x, y) == 0) {
+    Engine::map.setTile(x, y, 2);
+    Engine::addObject(new Particle(x, y, LIGHTGREEN));
+    Engine::addObject(new Particle(x, y, LIGHTGREEN));
+    Engine::addObject(new Particle(x, y, YELLOW));
+  }
+}

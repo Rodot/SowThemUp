@@ -14,7 +14,7 @@ void TileMap::load(const uint8_t* d) {
       int tile = data[i + (j * widthTiles)];
       if (tile == 4) {
         //create the enemy
-        Engine::addObject(new Enemy(i * tileSize, j * tileSize, 0.2, 0));
+        Engine::addObject(new Enemy(i * tileSize, j * tileSize));
         //remove the tile
         data[i + (j * widthTiles)] = 0;
       }

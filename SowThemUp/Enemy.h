@@ -6,7 +6,7 @@
 
 class Enemy : public Object {
   public:
-    Enemy(float X, float Y, float VX, float VY);
+    Enemy(float X, float Y);
     virtual void init();
     virtual void update();
     virtual void interact(Object* obj);

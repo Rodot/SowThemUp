@@ -36,16 +36,7 @@ void Player::update() {
     Engine::addObject(new Bullet(getCenterX(), y + height + 1, vx, vy));
   }
   if (gb.buttons.pressed(BUTTON_B)) {
-    //add a tree
-    Engine::map.setTile(getCenterX(), getCenterY(), 2);
-    Engine::addObject(new Particle(getCenterX(), getCenterY(), LIGHTGREEN));
-    Engine::addObject(new Particle(getCenterX(), getCenterY(), LIGHTGREEN));
-    Engine::addObject(new Particle(getCenterX(), getCenterY(), LIGHTGREEN));
-    Engine::addObject(new Particle(getCenterX(), getCenterY(), LIGHTGREEN));
-    Engine::addObject(new Particle(getCenterX(), getCenterY(), LIGHTGREEN));
-    Engine::addObject(new Particle(getCenterX(), getCenterY(), YELLOW));
-    Engine::addObject(new Particle(getCenterX(), getCenterY(), YELLOW));
-    Engine::addObject(new Particle(getCenterX(), getCenterY(), YELLOW));
+    // do nothing yet
   }
 
   //controls with the buttons

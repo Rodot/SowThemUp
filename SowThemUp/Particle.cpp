@@ -5,7 +5,7 @@ Particle::Particle(float X, float Y, Color c) {
   y = Y;
   vx = float(random(0, 11) - 5) / 5.0;
   vy = float(random(0, 11) - 5) / 5.0;
-  friction = 0.8;
+  friction = 0.9;
   bounce = 1;
   width = random(1, 3);
   height = width;
