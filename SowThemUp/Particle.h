@@ -8,6 +8,7 @@ class Particle : public Object {
     Particle(float X, float Y, Color c);
     virtual void update();
     virtual void die();
+    virtual void interact(Object * obj);
 };
 
 #endif

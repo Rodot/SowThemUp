@@ -11,7 +11,6 @@ class Player : public Object {
     void init();
     void die();
     void update();
-    void draw();
     virtual void interact(Object* obj);
 };
 

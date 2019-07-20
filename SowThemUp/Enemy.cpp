@@ -11,10 +11,19 @@ Enemy::Enemy(float X, float Y, float VX, float VY) {
 }
 
 void Enemy::init() {
-  Object::init();
-  color = ORANGE;
+  x = 8;
+  y = 8;
+  vx = 0;
+  vy = 0;
+  width = 6;
+  height = 6;
   friction = 1;
   bounce = 1;
+  life = 10;
+  collideMap = true;
+  collideObjects = true;
+  justCreated = true;
+  color = ORANGE;
 }
 
 void Enemy::update() {
@@ -36,4 +45,13 @@ void Enemy::interact(Object * obj) {
     life = 0;
     return;
   }
+}
+
+void Enemy::die(){
+  //particle effects
+  Engine::addObject(new Particle(x, y , ORANGE));
+  Engine::addObject(new Particle(x, y , ORANGE));
+  Engine::addObject(new Particle(x, y , ORANGE));
+  Engine::addObject(new Particle(x, y , YELLOW));
+  Engine::addObject(new Particle(x, y , YELLOW));
 }

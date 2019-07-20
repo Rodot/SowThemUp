@@ -8,11 +8,27 @@ Player::Player() {
 
 void Player::init() {
   Object::init();
+  x = 8;
+  y = 8;
+  vx = 0;
+  vy = 0;
+  width = 6;
+  height = 6;
+  friction = 0.9;
+  bounce = 0;
+  life = 10;
+  collideMap = true;
+  collideObjects = true;
+  justCreated = true;
   color = WHITE;
 }
 
 void Player::die() {
-  //Engine::addObject(new Player());
+  Engine::addObject(new Particle(x, y , ORANGE));
+  Engine::addObject(new Particle(x, y , ORANGE));
+  Engine::addObject(new Particle(x, y , ORANGE));
+  Engine::addObject(new Particle(x, y , YELLOW));
+  Engine::addObject(new Particle(x, y , YELLOW));
 }
 
 void Player::update() {
@@ -33,6 +49,7 @@ void Player::update() {
     Engine::addObject(new Particle(getCenterX(), getCenterY(), YELLOW));
   }
 
+  //controls with the buttons
   if (gb.buttons.repeat(BUTTON_RIGHT, 1)) {
     vx += 0.5;
   }
@@ -46,35 +63,34 @@ void Player::update() {
     vy += 0.1;
   }
 
-  //constant player movement
+  //constant player movement, going down
   vy += 0.05;
 
-  updatePhysics();
+  //reduce speed due to air friction
+  vx *= friction;
+  vy *= friction;
 
-  //limit speeds
+  //limit maximum speeds
   vx = constrain(vx, -3, 3);
   vy = constrain(vy, -3, 3);
-  //stop if moving too slow
+  
+  //stop if speed is really low
   if (abs(vx) < 0.02) vx = 0;
   if (abs(vy) < 0.02) vy = 0;
 
+  //move horizontally (x) and check for collisions with the map
   x += vx;
-  int collided = collideMapX();
+  collideMapX();
 
+  //move vertically (y) and check for collisions with the map
   y += vy;
-  collided = collideMapY();
+  collideMapY();
 
+  //move the camera to follow the player
   Engine::cameraTargetX = getCenterX() - gb.display.width() / 2;
   Engine::cameraTargetY = getCenterY() - gb.display.height() / 5;
 }
 
-
-void Player::draw() {
-  Object::draw();
-  //gb.display.setCursor(0, gb.display.height() - 5);
-  //gb.display.println(life);
-}
-
 void Player::interact(Object * obj) {
-  //do nothing
+  // do nothing)
 }

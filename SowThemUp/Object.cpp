@@ -7,42 +7,29 @@ Object::Object() {
   init();
 }
 
-Object::Object(float X, float Y, float W, float H, float VX, float VY) {
-  init();
-  x = X;
-  y = Y;
-  vx = VX;
-  vy = VY;
-  width = W;
-  height = H;
-}
-
 void Object::init() {
-  x = 8;
-  y = 8;
+  //all fields to be set the the child class' init
+  /* 
+  x = 0;
+  y = 0;
   vx = 0;
   vy = 0;
-  width = 6;
-  height = 6;
-  friction = 0.9;
+  width = 8;
+  height = 8;
+  friction = 1;
   bounce = 0;
   life = 10;
   collideMap = true;
   collideObjects = true;
   justCreated = true;
-  color = RED;
-}
-
-void Object::die() {
-  Engine::addObject(new Particle(x, y , ORANGE));
-  Engine::addObject(new Particle(x, y , ORANGE));
-  Engine::addObject(new Particle(x, y , ORANGE));
-  Engine::addObject(new Particle(x, y , YELLOW));
-  Engine::addObject(new Particle(x, y , YELLOW));
+  color = PINK;
+  */
 }
 
 void Object::update() {
-  updatePhysics();
+  //reduce speed due to air friction
+  vx *= friction;
+  vy *= friction;
 
   //limit speeds
   vx = constrain(vx, -7, 7);
@@ -55,13 +42,14 @@ void Object::update() {
 
   y += vy;
   collideMapY();
-
-
 }
 
-void Object::updatePhysics() {
-  vx *= friction;
-  vy *= friction;
+void Object::die(){
+  //do nothing
+}
+
+void Object::interact(Object * obj) {
+  // do nothing
 }
 
 int Object::collideMapX() {
@@ -113,9 +101,6 @@ int Object::collideMapY() {
     life --;
   }
   return 0;
-}
-
-void Object::interact(Object * obj) {
 }
 
 void Object::draw() {

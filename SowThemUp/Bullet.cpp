@@ -1,9 +1,10 @@
 #include "Bullet.h"
 
 Bullet::Bullet(float X, float Y, float VX, float VY) {
-  Object::init();
   x = X;
   y = Y;
+  friction = 0.9;
+  bounce = 0;
   width = 2;
   height = 2;
   vx = float(random(0, 10) - 5) / 10;
@@ -11,6 +12,7 @@ Bullet::Bullet(float X, float Y, float VX, float VY) {
   life = 1;
   collideMap = true;
   collideObjects = false;
+  justCreated = true;
   y -= vy; //go back one step so the first update is done in the right place
   y += 2 * VY; //offset by the shooter's speed to avoid killing him lol
   color = LIGHTBLUE;
@@ -48,10 +50,10 @@ void Bullet::die() {
 
 void Bullet::interact(Object * obj) {
   if (!life) return;
-  if (!obj->collideObjects) return;
-  if (colliding(obj)) {
-    obj->life -= 4;
-    life = 0;
+  if (!obj->collideObjects) return;  // skip objects which don't collide
+  if (colliding(obj)) {  // if the bullet hits an object
+    obj->life -= 4;  // reduce the object's life
+    life = 0;  // remove the bullet
     return;
   }
 }

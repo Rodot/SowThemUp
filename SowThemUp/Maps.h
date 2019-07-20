@@ -1,10 +1,11 @@
 #ifndef _MAPS_H_
 #define  _MAPS_H_
 
-// 0 == FLOOR
-// 1 == WALL
-// 2 == TREE
-// 3 == FIRE
+// 0 FLOOR
+// 1 WALL
+// 2 TREE
+// 3 FIRE
+// 4 ENEMY
 
 const uint8_t map1[] = {
   1, 1, 1, 1, 1, 1, 1, 1, 1, 1,

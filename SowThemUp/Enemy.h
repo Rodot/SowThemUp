@@ -10,6 +10,7 @@ class Enemy : public Object {
     virtual void init();
     virtual void update();
     virtual void interact(Object* obj);
+    virtual void die();
 };
 
 #endif // _ENEMY_H_

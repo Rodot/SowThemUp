@@ -13,11 +13,9 @@ class Object {
     Color color;
 
     Object();
-    Object(float X, float Y, float W, float H, float VX, float VY);
     virtual void init();
     virtual void update();
     virtual void die();
-    virtual void updatePhysics();
     virtual int collideMapX();
     virtual int collideMapY();
     virtual void interact(Object* obj);
