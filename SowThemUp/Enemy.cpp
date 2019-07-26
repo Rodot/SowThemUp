@@ -1,6 +1,23 @@
 #include "Enemy.h"
 #include <Gamebuino-Meta.h>
 
+const uint16_t enemy_data[] = {
+  6,      // frame width
+  6,      // frame height
+  4,      // number of frames
+  0,      // animation speed
+  0xf81f, // transparent color
+  0,      // RGB565 color mode
+  0xfd42, 0xfd42, 0xfd42, 0xfd42, 0xfd42, 0xfd42,
+  0xfd42, 0x0000, 0x0000, 0x0000, 0x0000, 0xfd42,
+  0xfd42, 0x0000, 0x0000, 0x0000, 0x0000, 0xfd42,
+  0xfd42, 0x0000, 0x0000, 0x0000, 0x0000, 0xfd42,
+  0xfd42, 0x0000, 0x0000, 0x0000, 0x0000, 0xfd42,
+  0xfd42, 0xfd42, 0xfd42, 0xfd42, 0xfd42, 0xfd42,
+};
+
+Image enemy_image(enemy_data);
+
 Enemy::Enemy(float X, float Y) {
   init();
   x = X;
@@ -19,6 +36,7 @@ void Enemy::init() {
   collideObjects = true;
   justCreated = true;
   color = ORANGE;
+  image = &enemy_image;
 }
 
 void Enemy::update() {

@@ -6,6 +6,7 @@ Object::Object() {
 }
 
 void Object::init() {
+  image = 0;
   //all fields to be set the the child class' init
   /*
     x = 0;
@@ -103,7 +104,11 @@ int Object::collideMapY() {
 
 void Object::draw() {
   gb.display.setColor(color);
-  gb.display.drawRect((int)(x + 0.05) - (int)Engine::cameraX, (int)(y + 0.05) - (int)Engine::cameraY, width, height);
+  if (image) {
+    gb.display.drawImage((int)(x + 0.05) - (int)Engine::cameraX, (int)(y + 0.05) - (int)Engine::cameraY, *image, width, height);
+  } else {
+    gb.display.drawRect((int)(x + 0.05) - (int)Engine::cameraX, (int)(y + 0.05) - (int)Engine::cameraY, width, height);
+  }
 }
 
 int Object::collidingTile() {

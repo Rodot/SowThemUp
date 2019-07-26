@@ -7,15 +7,16 @@ Bullet::Bullet(float X, float Y, float VX, float VY) {
   bounce = 0;
   width = 2;
   height = 2;
-  vx = float(random(0, 10) - 5) / 10;
-  vy = 5;
+  int spread = 5;
+  vx = float(random(0, spread * 2) - spread) / 10.0;
+  vy = float(random(50,70)) / 10.0;
   life = 1;
   collideMap = true;
   collideObjects = false;
   justCreated = true;
   y -= vy; //go back one step so the first update is done in the right place
   y += 2 * VY; //offset by the shooter's speed to avoid killing him lol
-  color = LIGHTBLUE;
+  color = DARKBLUE;
 }
 
 void Bullet::update() {
@@ -32,33 +33,18 @@ void Bullet::die() {
   //just splash water particles
   Engine::addObject(new Particle(x + 1, y, DARKBLUE));
   Engine::addObject(new Particle(x + 1, y, DARKBLUE));
-  Engine::addObject(new Particle(x + 1, y, BLUE));
-
-  int currentTile = Engine::map.getTile(x, y);
-
-  // if it's a fire tile
-  if (currentTile == 3) {
-    if ((random(0, 3) == 0)) {  // remove the tile with 1 chance out of 3
-      Engine::map.setTile(x, y, 0);
-      //flame particles
-      Engine::addObject(new Particle(x + 1, y, ORANGE));
-      Engine::addObject(new Particle(x + 1, y, ORANGE));
-      Engine::addObject(new Particle(x + 1, y, ORANGE));
-      Engine::addObject(new Particle(x + 1, y, ORANGE));
-      Engine::addObject(new Particle(x + 1, y, YELLOW));
-      Engine::addObject(new Particle(x + 1, y, YELLOW));
-    }
-  }
+  Engine::addObject(new Particle(x + 1, y, LIGHTBLUE));
+  Engine::addObject(new Particle(x + 1, y, LIGHTBLUE));
+  Engine::addObject(new Particle(x + 1, y, LIGHTBLUE));
 
   //if it's a tree
-  if (currentTile == 2) {
+  if (Engine::map.getTile(x, y) == 2) {
     int s = Engine::map.tileSize;
     //if the space is empty, grow a tree
     Engine::growTree(x + s, y);
     Engine::growTree(x - s, y);
     Engine::growTree(x, y + s);
     Engine::growTree(x, y - s);
-
   }
 }
 
@@ -66,7 +52,7 @@ void Bullet::interact(Object * obj) {
   if (!life) return;
   if (!obj->collideObjects) return;  // skip objects which don't collide
   if (colliding(obj)) {  // if the bullet hits an object
-    obj->life -= 4;  // reduce the object's life
+    obj->life -= 10;  // reduce the object's life
     life = 0;  // remove the bullet
     return;
   }

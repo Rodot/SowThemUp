@@ -7,14 +7,17 @@ float Engine::cameraX = 8;
 float Engine::cameraY = 8;
 float Engine::cameraTargetX = 8;
 float Engine::cameraTargetY = 8;
+boolean Engine::won = false;
+boolean Engine::gameOver = false;
 Object* Engine::objects[ENGINE_NUM_OBJECTS];
 TileMap Engine::map;
-
 extern const uint8_t map1[];
 
 void Engine::init() {
   addObject(new Player());
   map.load(map1);
+  won = false;
+  gameOver = false;
 }
 
 void Engine::clear() {
@@ -84,6 +87,15 @@ void Engine::draw() {
     if (objects[i]->justCreated) continue;
     objects[i]->draw();
   }
+
+  if(gameOver == true){
+    drawGameOver();
+  }
+
+  if(won == true){
+    drawWon();
+  }
+  
   //print info
   gb.display.setColor(WHITE);
   /*gb.display.print(gb.getCpuLoad());
@@ -119,4 +131,16 @@ int Engine::growTree(int x, int y) {
     Engine::addObject(new Particle(x, y, LIGHTGREEN));
     Engine::addObject(new Particle(x, y, YELLOW));
   }
+}
+
+void Engine::drawGameOver(){
+  gb.display.setCursor(0,0);
+  gb.display.setColor(RED);
+  gb.display.print("GAME OVER!");
+}
+
+void Engine::drawWon(){
+  gb.display.setCursor(0,0);
+  gb.display.setColor(GREEN);
+  gb.display.print("YOU WON!");
 }

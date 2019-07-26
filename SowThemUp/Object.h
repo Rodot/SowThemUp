@@ -23,6 +23,7 @@ class Object {
     int colliding(Object* obj);
     float getCenterX();
     float getCenterY();
+    Image *image;
 };
 
 #endif // _OBJECT_H_

@@ -1,6 +1,23 @@
 #include "Player.h"
 #include <Gamebuino-Meta.h>
 
+const uint16_t player_data[] = {
+  6,      // frame width
+  6,      // frame height
+  4,      // number of frames
+  0,      // animation speed
+  0xf81f, // transparent color
+  0,      // RGB565 color mode
+  0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff,
+  0xffff, 0x0000, 0x0000, 0x0000, 0x0000, 0xffff,
+  0xffff, 0x0000, 0x0000, 0x0000, 0x0000, 0xffff,
+  0xffff, 0x0000, 0x0000, 0x0000, 0x0000, 0xffff,
+  0xffff, 0x0000, 0x0000, 0x0000, 0x0000, 0xffff,
+  0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff,
+};
+
+Image player_image(player_data);
+
 Player::Player() {
   init();
 }
@@ -20,9 +37,12 @@ void Player::init() {
   collideObjects = true;
   justCreated = true;
   color = WHITE;
+  image = &player_image;
 }
 
 void Player::die() {
+  Engine::won = false;
+  Engine::gameOver = true;
   Engine::addObject(new Particle(x, y , ORANGE));
   Engine::addObject(new Particle(x, y , ORANGE));
   Engine::addObject(new Particle(x, y , ORANGE));

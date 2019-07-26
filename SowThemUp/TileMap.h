@@ -5,12 +5,12 @@
 class TileMap {
   public:
     //the size of the map in number of tiles
-    static const int widthTiles = 10;
-    static const int heightTiles = 50;
+    static const int widthTiles = 12;
+    static const int heightTiles = 150;
     //the widht/height of the tiles in number of pixels
     static const int tileSize = 8;
     //stores the map's data
-    uint8_t data[10 * 50];
+    uint8_t data[widthTiles * heightTiles];
 
     TileMap();
     void load(const uint8_t* d);
