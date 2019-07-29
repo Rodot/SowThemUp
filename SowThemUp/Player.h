@@ -12,6 +12,7 @@ class Player : public Object {
     void die();
     void update();
     virtual void interact(Object* obj);
+    int specialCooldown;
 };
 
 #endif // _PLAYER_H_

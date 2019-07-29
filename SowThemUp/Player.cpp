@@ -33,6 +33,7 @@ void Player::init() {
   friction = 0.9;
   bounce = 0;
   life = 10;
+  specialCooldown = 0;
   collideMap = true;
   collideObjects = true;
   justCreated = true;
@@ -55,11 +56,23 @@ void Player::update() {
     //throw water
     Engine::addObject(new Bullet(getCenterX(), y + height + 1, vx, vy));
   }
-  if (gb.buttons.pressed(BUTTON_B)) {
-    // do nothing yet
+
+  if (specialCooldown > 0) {
+    specialCooldown = specialCooldown - 1;
+  } else if (gb.buttons.pressed(BUTTON_B)) {
+    int x = getCenterX();
+    int y = getCenterY();
+    // reset the cooldown timer
+    specialCooldown = 125;
+    // do the special move
+    Engine::growTree(x, y);
+    Engine::growTree(x, y + 8);
+    Engine::growTree(x, y - 8);
+    Engine::growTree(x + 8, y);
+    Engine::growTree(x - 8, y);
   }
 
-  //controls with the buttons
+  //move player using buttons
   if (gb.buttons.repeat(BUTTON_RIGHT, 1)) {
     vx += 0.5;
   }
