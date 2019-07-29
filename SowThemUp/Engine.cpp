@@ -88,16 +88,19 @@ void Engine::draw() {
     objects[i]->draw();
   }
 
-  if(gameOver == true){
+  gb.display.setColor(WHITE);
+  gb.display.print("TREES SAVED:");
+  gb.display.print(Engine::map.getTreeCount());
+
+  if (gameOver == true) {
     drawGameOver();
   }
 
-  if(won == true){
+  if (won == true) {
     drawWon();
   }
-  
+
   //print info
-  gb.display.setColor(WHITE);
   /*gb.display.print(gb.getCpuLoad());
     gb.display.print("% ");
     gb.display.print((100 * gb.getFreeRam()) / 32768);
@@ -109,8 +112,6 @@ void Engine::draw() {
     gb.display.print(num);
     gb.display.print("/");
     gb.display.println(ENGINE_NUM_OBJECTS);*/
-  gb.display.print("TREES:");
-  gb.display.print(Engine::map.getTreeCount());
 }
 
 int Engine::addObject(Object * object) {
@@ -133,14 +134,57 @@ int Engine::growTree(int x, int y) {
   }
 }
 
-void Engine::drawGameOver(){
-  gb.display.setCursor(0,0);
+void Engine::drawGameOver() {
+  int numberOfTrees = Engine::map.getTreeCount();
+
+  //draw the background rectangle
+  gb.display.setColor(BLACK);
+  gb.display.fillRect(0, 24, 80, 40);
   gb.display.setColor(RED);
-  gb.display.print("GAME OVER!");
+  gb.display.drawRect(0, 24, 80, 40);
+
+  //print the big title
+  gb.display.setCursor(2, 26);
+  gb.display.setFontSize(2);
+  gb.display.setColor(RED);
+  gb.display.print("OH NO!\n");
+
+  //print the text
+  gb.display.setFontSize(1);
+  gb.display.setColor(WHITE);
+  gb.display.print(" YOU SAVED ");
+  gb.display.print(numberOfTrees);
+  gb.display.print(" TREES\n BEFORE YOU PERISHED\n TRY AGAIN!");
 }
 
-void Engine::drawWon(){
-  gb.display.setCursor(0,0);
-  gb.display.setColor(GREEN);
-  gb.display.print("YOU WON!");
+void Engine::drawWon() {
+  int numberOfTrees = Engine::map.getTreeCount();
+
+  //draw the background rectangle
+  gb.display.setColor(BLACK);
+  gb.display.fillRect(0, 24, 80, 40);
+  gb.display.setColor(LIGHTGREEN);
+  gb.display.drawRect(0, 24, 80, 40);
+
+  //print the big title
+  gb.display.setCursor(2, 26);
+  gb.display.setFontSize(2);
+  gb.display.setColor(LIGHTGREEN);
+  gb.display.print("WELL DONE\n");
+
+  //print the text
+  gb.display.setFontSize(1);
+  gb.display.setColor(WHITE);
+  gb.display.print(" YOU SAVED ");
+  gb.display.print(numberOfTrees);
+  gb.display.print(" TREES\n");
+  
+  if (numberOfTrees > 100) {
+    gb.display.print(" THEY ABSORB THE CO2\n IT STOPS THE\n GLOBAL WARMING.\n YOU DIT IT!");
+  } else if (numberOfTrees > 50) {
+    gb.display.print(" GLOBAL WARMING\n HAS SLOWED DOWN\n YOU CAN DO BETTER!");
+  } else {
+    gb.display.print(" YOU CAN DO BETTER\n TO SAVE THE PLANET\n FROM GLOBAL WARMING");
+  }
+
 }

@@ -5,6 +5,7 @@ Engine engine = Engine();
 void setup() {
   gb.begin();
   engine.init();
+  gb.display.clearTransparentColor();
 }
 
 void loop() {
@@ -17,4 +18,3 @@ void loop() {
   }
   engine.update();
 }
-

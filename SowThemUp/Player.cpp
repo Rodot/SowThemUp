@@ -99,6 +99,11 @@ void Player::update() {
   //move the camera to follow the player
   Engine::cameraTargetX = getCenterX() - gb.display.width() / 2;
   Engine::cameraTargetY = getCenterY() - gb.display.height() / 5;
+
+  if (y > (Engine::map.heightTiles * Engine::map.tileSize - 50)) {
+    Engine::won = true;
+    Engine::gameOver = false;
+  }
 }
 
 void Player::interact(Object * obj) {
