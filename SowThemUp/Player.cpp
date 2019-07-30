@@ -46,8 +46,6 @@ void Player::die() {
   Engine::gameOver = true;
   Engine::addObject(new Particle(x, y , ORANGE));
   Engine::addObject(new Particle(x, y , ORANGE));
-  Engine::addObject(new Particle(x, y , ORANGE));
-  Engine::addObject(new Particle(x, y , YELLOW));
   Engine::addObject(new Particle(x, y , YELLOW));
 }
 

@@ -89,7 +89,7 @@ void Engine::draw() {
   }
 
   gb.display.setColor(WHITE);
-  gb.display.print("TREES SAVED:");
+  gb.display.print("TREES:");
   gb.display.print(Engine::map.getTreeCount());
 
   if (gameOver == true) {

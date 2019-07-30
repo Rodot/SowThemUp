@@ -118,8 +118,6 @@ void Enemy::update() {
     //fire particle effect
     Engine::addObject(new Particle(x, y , ORANGE));
     Engine::addObject(new Particle(x, y , ORANGE));
-    Engine::addObject(new Particle(x, y , ORANGE));
-    Engine::addObject(new Particle(x, y , YELLOW));
     Engine::addObject(new Particle(x, y , YELLOW));
   }
 }
@@ -138,7 +136,5 @@ void Enemy::die() {
   //particle effects
   Engine::addObject(new Particle(x, y , ORANGE));
   Engine::addObject(new Particle(x, y , ORANGE));
-  Engine::addObject(new Particle(x, y , ORANGE));
-  Engine::addObject(new Particle(x, y , YELLOW));
   Engine::addObject(new Particle(x, y , YELLOW));
 }

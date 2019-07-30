@@ -32,8 +32,6 @@ void Bullet::die() {
 
   //just splash water particles
   Engine::addObject(new Particle(x + 1, y, DARKBLUE));
-  Engine::addObject(new Particle(x + 1, y, DARKBLUE));
-  Engine::addObject(new Particle(x + 1, y, LIGHTBLUE));
   Engine::addObject(new Particle(x + 1, y, LIGHTBLUE));
   Engine::addObject(new Particle(x + 1, y, LIGHTBLUE));
 
