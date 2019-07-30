@@ -57,17 +57,33 @@ void Player::update() {
 
   if (specialCooldown > 0) {
     specialCooldown = specialCooldown - 1;
-  } else if (gb.buttons.pressed(BUTTON_B)) {
+  } else {
     int x = getCenterX();
     int y = getCenterY();
-    // reset the cooldown timer
-    specialCooldown = 125;
-    // do the special move
-    Engine::growTree(x, y);
-    Engine::growTree(x, y + 8);
-    Engine::growTree(x, y - 8);
-    Engine::growTree(x + 8, y);
-    Engine::growTree(x - 8, y);
+    // do the special move in several steps
+    if (gb.buttons.pressed(BUTTON_B)) {
+      Engine::growTree(x, y);
+    }
+    if (gb.buttons.held(BUTTON_B, 2)) {
+      Engine::growTree(x + 8, y);
+      Engine::growTree(x - 8, y);
+    }
+    if (gb.buttons.held(BUTTON_B, 4)) {
+      Engine::growTree(x + 16, y);
+      Engine::growTree(x - 16, y);
+    }
+    if (gb.buttons.held(BUTTON_B, 6)) {
+      Engine::growTree(x + 24, y);
+      Engine::growTree(x - 24, y);
+    }
+    if (gb.buttons.held(BUTTON_B, 8)) {
+      Engine::growTree(x + 32, y);
+      Engine::growTree(x - 32, y);
+    }
+    if (gb.buttons.released(BUTTON_B)) {
+      //reset the cooldown
+      specialCooldown = 50;
+    }
   }
 
   //move player using buttons
