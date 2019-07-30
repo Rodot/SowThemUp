@@ -103,10 +103,13 @@ int Object::collideMapY() {
 }
 
 void Object::draw() {
-  gb.display.setColor(color);
+  // skip object above and below screen
+  if ((y < Engine::cameraY) || (y > (Engine::cameraY + gb.display.height()))) return;
+  //draw object
   if (image) {
     gb.display.drawImage((int)(x + 0.05) - (int)Engine::cameraX, (int)(y + 0.05) - (int)Engine::cameraY, *image, width, height);
   } else {
+    gb.display.setColor(color);
     gb.display.drawRect((int)(x + 0.05) - (int)Engine::cameraX, (int)(y + 0.05) - (int)Engine::cameraY, width, height);
   }
 }

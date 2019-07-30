@@ -10,10 +10,10 @@ class TileMap {
     //the widht/height of the tiles in number of pixels
     static const int tileSize = 8;
     //stores the map's data
-    uint8_t data[widthTiles * heightTiles];
+    char data[widthTiles * heightTiles];
 
     TileMap();
-    void load(const uint8_t* d);
+    void load(const char* d);
     int getTile(int x, int y);
     void setTile(int x, int y, int t);
     void draw();

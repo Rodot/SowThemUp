@@ -11,7 +11,7 @@ boolean Engine::won = false;
 boolean Engine::gameOver = false;
 Object* Engine::objects[ENGINE_NUM_OBJECTS];
 TileMap Engine::map;
-extern const uint8_t map1[];
+extern const char map1[];
 
 void Engine::init() {
   addObject(new Player());
@@ -101,17 +101,18 @@ void Engine::draw() {
   }
 
   //print info
-  /*gb.display.print(gb.getCpuLoad());
-    gb.display.print("% ");
-    gb.display.print((100 * gb.getFreeRam()) / 32768);
-    gb.display.print("% ");
-    int num = 0;
-    for (int i = 0; i < ENGINE_NUM_OBJECTS; i++) {
+  gb.display.setCursor(0,59);
+  gb.display.print(gb.getCpuLoad());
+  gb.display.print("%CPU ");
+  gb.display.print((100 * gb.getFreeRam()) / 32768);
+  gb.display.print("%MEM ");
+  int num = 0;
+  for (int i = 0; i < ENGINE_NUM_OBJECTS; i++) {
     if (objects[i] != 0) num++;
-    }
-    gb.display.print(num);
-    gb.display.print("/");
-    gb.display.println(ENGINE_NUM_OBJECTS);*/
+  }
+  gb.display.print(num);
+  gb.display.print("/");
+  gb.display.println(ENGINE_NUM_OBJECTS);
 }
 
 int Engine::addObject(Object * object) {
@@ -178,7 +179,7 @@ void Engine::drawWon() {
   gb.display.print(" YOU SAVED ");
   gb.display.print(numberOfTrees);
   gb.display.print(" TREES\n");
-  
+
   if (numberOfTrees > 100) {
     gb.display.print(" THEY ABSORB THE CO2\n IT STOPS THE\n GLOBAL WARMING.\n YOU DIT IT!");
   } else if (numberOfTrees > 50) {
