@@ -43,7 +43,7 @@ const uint16_t tree_data[] = {
 
 Image tree_image(tree_data);
 
-const uint16_t fire_data[] = {
+const uint16_t lava_data[] = {
   8,      // frame width
   8,      // frame height
   8,      // number of frames
@@ -124,7 +124,7 @@ const uint16_t fire_data[] = {
   0x0000, 0xd8e4, 0xd8e4, 0xd8e4, 0xd8e4, 0xd8e4, 0xd8e4, 0x0000
 };
 
-Image fire_image(fire_data);
+Image lava_image(lava_data);
 
 TileMap::TileMap() {
 }
@@ -163,7 +163,7 @@ void TileMap::draw() {
         //gb.display.drawRect(i * tileSize - (int)Engine::cameraX, j * tileSize - (int)Engine::cameraY, tileSize, tileSize);
         if (tile == 1) gb.display.drawImage(i * tileSize - x, j * tileSize - y, wall_image);
         if (tile == 2) gb.display.drawImage(i * tileSize - x, j * tileSize - y, tree_image);
-        if (tile == 3) gb.display.drawImage(i * tileSize - x, j * tileSize - y, fire_image);
+        if (tile == 3) gb.display.drawImage(i * tileSize - x, j * tileSize - y, lava_image);
       }
       
       //spawn enemies

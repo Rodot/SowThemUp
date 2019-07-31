@@ -52,7 +52,10 @@ void Player::die() {
 void Player::update() {
   if (gb.buttons.repeat(BUTTON_A, 4)) {
     //throw water
-    Engine::addObject(new Bullet(getCenterX(), y + height + 1, vx, vy));
+    int spread = 5;
+    int bvx = float(random(0, spread * 2) - spread) / 10.0;
+    int bvy = float(random(50, 70)) / 10.0;
+    Engine::addObject(new Bullet(getCenterX(), y + height + 1, bvx, bvy));
   }
 
   if (specialCooldown > 0) {
@@ -61,24 +64,33 @@ void Player::update() {
     int x = getCenterX();
     int y = getCenterY();
     // do the special move in several steps
-    if (gb.buttons.pressed(BUTTON_B)) {
-      Engine::growTree(x, y);
+
+    if (gb.buttons.held(BUTTON_B, 1)) {
+      Engine::addObject(new Bullet(x, y + 5, -2, 5));
+      Engine::addObject(new Bullet(x, y + 5, -1, 5));
+      Engine::addObject(new Bullet(x, y + 5, 0, 5));
+      Engine::addObject(new Bullet(x, y + 5, 1, 5));
+      Engine::addObject(new Bullet(x, y + 5, 2, 5));
     }
-    if (gb.buttons.held(BUTTON_B, 2)) {
+    if (gb.buttons.held(BUTTON_B, 12)) {
       Engine::growTree(x + 8, y);
+      Engine::growTree(x, y + 8);
       Engine::growTree(x - 8, y);
     }
-    if (gb.buttons.held(BUTTON_B, 4)) {
-      Engine::growTree(x + 16, y);
-      Engine::growTree(x - 16, y);
+    if (gb.buttons.held(BUTTON_B, 13)) {
+      Engine::growTree(x + 8, y + 8);
+      Engine::growTree(x, y + 16);
+      Engine::growTree(x - 8, y + 8);
     }
-    if (gb.buttons.held(BUTTON_B, 6)) {
-      Engine::growTree(x + 24, y);
-      Engine::growTree(x - 24, y);
+    if (gb.buttons.held(BUTTON_B, 14)) {
+      Engine::growTree(x + 8, y + 16);
+      Engine::growTree(x, y + 24);
+      Engine::growTree(x - 8, y + 16);
     }
-    if (gb.buttons.held(BUTTON_B, 8)) {
-      Engine::growTree(x + 32, y);
-      Engine::growTree(x - 32, y);
+    if (gb.buttons.held(BUTTON_B, 15)) {
+      Engine::growTree(x + 8, y + 24);
+      Engine::growTree(x, y + 32);
+      Engine::growTree(x - 8, y + 24);
     }
     if (gb.buttons.released(BUTTON_B)) {
       //reset the cooldown

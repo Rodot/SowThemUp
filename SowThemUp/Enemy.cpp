@@ -115,7 +115,7 @@ void Enemy::update() {
   //burn the trees
   if (Engine::map.getTile(getCenterX(), getCenterY()) == 2) {
     Engine::map.setTile(getCenterX(), getCenterY(), 0);
-    //fire particle effect
+    //lava particle effect
     Engine::addObject(new Particle(x, y , ORANGE));
     Engine::addObject(new Particle(x, y , ORANGE));
     Engine::addObject(new Particle(x, y , YELLOW));

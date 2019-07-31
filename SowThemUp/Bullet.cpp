@@ -1,22 +1,19 @@
 #include "Bullet.h"
 
 Bullet::Bullet(float X, float Y, float VX, float VY) {
-  x = X;
-  y = Y;
-  friction = 0.9;
-  bounce = 0;
   width = 2;
   height = 2;
-  int spread = 5;
-  vx = float(random(0, spread * 2) - spread) / 10.0;
-  vy = float(random(50,70)) / 10.0;
+  x = X - width / 2;
+  y = Y - height / 2;
+  friction = 0.9;
+  bounce = 0;
+  vx = VX;
+  vy = VY;
   life = 1;
   collideMap = true;
   collideObjects = false;
   justCreated = true;
-  y -= vy; //go back one step so the first update is done in the right place
-  y += 2 * VY; //offset by the shooter's speed to avoid killing him lol
-  color = DARKBLUE;
+  color = LIGHTBLUE;
 }
 
 void Bullet::update() {
@@ -31,9 +28,9 @@ void Bullet::die() {
   life = 0;
 
   //just splash water particles
+  Engine::addObject(new Particle(x + 1, y, BLUE));
   Engine::addObject(new Particle(x + 1, y, DARKBLUE));
-  Engine::addObject(new Particle(x + 1, y, LIGHTBLUE));
-  Engine::addObject(new Particle(x + 1, y, LIGHTBLUE));
+  Engine::addObject(new Particle(x + 1, y, DARKBLUE));
 
   //if it's a tree
   if (Engine::map.getTile(x, y) == 2) {

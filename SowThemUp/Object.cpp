@@ -70,7 +70,7 @@ int Object::collideMapX() {
       }
     }
   }
-  //Loose life when touching fire
+  //Loose life when touching lava
   if (Engine::map.getTile(getCenterX(), getCenterY()) == 3) {
     life --;
   }
@@ -95,7 +95,7 @@ int Object::collideMapY() {
       }
     }
   }
-  //Loose life when touching fire
+  //Loose life when touching lava
   if (Engine::map.getTile(getCenterX(), getCenterY()) == 3) {
     life --;
   }
