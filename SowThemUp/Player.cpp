@@ -67,27 +67,27 @@ void Player::update() {
 
     if (gb.buttons.held(BUTTON_B, 1)) {
       Engine::addObject(new Bullet(x, y + 5, -2, 5));
-      Engine::addObject(new Bullet(x, y + 5, -1, 5));
-      Engine::addObject(new Bullet(x, y + 5, 0, 5));
-      Engine::addObject(new Bullet(x, y + 5, 1, 5));
+      Engine::addObject(new Bullet(x, y + 5, -1, 6));
+      Engine::addObject(new Bullet(x, y + 5, 0, 7));
+      Engine::addObject(new Bullet(x, y + 5, 1, 6));
       Engine::addObject(new Bullet(x, y + 5, 2, 5));
     }
-    if (gb.buttons.held(BUTTON_B, 12)) {
+    if (gb.buttons.held(BUTTON_B, 8)) {
       Engine::growTree(x + 8, y);
       Engine::growTree(x, y + 8);
       Engine::growTree(x - 8, y);
     }
-    if (gb.buttons.held(BUTTON_B, 13)) {
+    if (gb.buttons.held(BUTTON_B, 11)) {
       Engine::growTree(x + 8, y + 8);
       Engine::growTree(x, y + 16);
       Engine::growTree(x - 8, y + 8);
     }
-    if (gb.buttons.held(BUTTON_B, 14)) {
+    if (gb.buttons.held(BUTTON_B, 13)) {
       Engine::growTree(x + 8, y + 16);
       Engine::growTree(x, y + 24);
       Engine::growTree(x - 8, y + 16);
     }
-    if (gb.buttons.held(BUTTON_B, 15)) {
+    if (gb.buttons.held(BUTTON_B, 14)) {
       Engine::growTree(x + 8, y + 24);
       Engine::growTree(x, y + 32);
       Engine::growTree(x - 8, y + 24);
